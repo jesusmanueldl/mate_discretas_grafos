@@ -1,4 +1,4 @@
-#import pinta #archivo para pintar Grafos (debes definirla)
+import pinta #archivo para pintar Grafos (debes definirla)
 
 
 #definimos un Vertice
@@ -20,7 +20,8 @@ class Grafo:
         self.A = A
         self.nombre = nombre
         self.inf = [list(map(lambda x: x.inf, self.V)),list(map(lambda x: x.inf, self.A)),self.nombre]
-    
+
+#Calculamos el grado de un vertice, recibe el Grafo y el vertice    
 def grado_verice(G, v):
     g = 0
     for a in G.A:
@@ -28,6 +29,7 @@ def grado_verice(G, v):
             g+=1
     return g
 
+#Calculamos los vertice adyacentes(vecinos) a un vertice, recibe un Grafo, y un vertice
 def verice_adyacente(G, v):
     ady = []
     for a in G.A:
@@ -36,9 +38,9 @@ def verice_adyacente(G, v):
     ady.sort()
     return ady
 
+#Hacemos la representcion del grfo con la matriz de adyacencia
 def matriz_adyacencia(G):
     mtad =[]
-    fila = None
     for v in G.V:
         fila =[]       
         ad = verice_adyacente(G, v.inf)       
@@ -49,6 +51,31 @@ def matriz_adyacencia(G):
                 fila +=[0]
         mtad +=[fila]
     return mtad
+
+'''
+Esta funcion vamos a leer un archivo.dat para leer los grafos
+el formato del archivo es una lista de la relaciones de cada vertice,
+las filas debe coincidir con el total de vertices:
+|----------| 
+|1 2 3 4   | 
+|2 2 3     | 
+|3 1 4     | 
+|4 1       | ;<----"sin salto de linea al final de la ultima lista"
+|----------|
+'''
+def leer_grafo_file(nombre_file, nombre_grafo):
+    try:
+        with open(nombre_file, 'r') as archivo:        
+            Ar = []
+            Vr = []
+            for c in archivo:
+                Ar +=[Vertice(int(c[0]))]
+                for ci in c[1:]:
+                    if ci != ' ' and ci != '\n':
+                        Vr +=[Arista(Vertice(int(c[0])), Vertice(int(ci)))]
+        return Grafo(Ar,Vr,nombre_grafo)  
+    except FileNotFoundError:
+        print("El archivo no se encontro") 
         
 
 
@@ -83,13 +110,15 @@ v = 3
 print(f'Grado del vertice {v}: '+str(grado_verice(g1,v)))
 print(f'Vertices adyacente/incidente de {v}: '+str(verice_adyacente(g1,v)))
 mtr = matriz_adyacencia(g1)
-print("Matriz de Adyacencia")
-for m in mtr:
-    print(m)
+#print("Matriz de Adyacencia")
+#for m in mtr:
+#    print(m)
 
-
+#print(archivo.read())
 #Visualizamos el Grafo, 
 #pinta.pinta_grafo(g1,"G1") #define esta funcion
+print(leer_grafo_file("g1.dat", "G2").inf)
+#pinta.pinta_grafo(leer_grafo_file("g1.dat", "G2"), "G2")
 
 
 
