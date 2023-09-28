@@ -1,4 +1,4 @@
-import pinta #archivo para pintar Grafos (debes definirla)
+#import pinta #archivo para pintar Grafos (debes definirla)
 
 
 #definimos un Vertice
