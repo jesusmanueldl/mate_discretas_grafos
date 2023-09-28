@@ -1,16 +1,17 @@
-#definimos una arista
+#definimos un Vertice
 class Vertice:
     def __init__(self,info):
         self.inf = info
 
 
-
+#definimos una Arista
 class Arista:
     def __init__(self, vi, vf):
         self.vi = vi
         self.vf = vf
         self.inf = [self.vi.inf,self.vf.inf]
-        
+
+#definimos un Grafo
 class Grafo:
     def __init__(self, V, A, nom):
         self.V = V
