@@ -4,7 +4,11 @@
 #definimos un Vertice
 class Vertice:
     def __init__(self,info):
-        self.inf = info
+        if isinstance(info, str):
+            self.inf = str(info)
+        else:
+            self.inf = info
+
 
 #definimos una Arista
 class Arista:
@@ -44,8 +48,8 @@ def matriz_adyacencia(G):
     for v in G.V:
         fila =[]       
         ad = verice_adyacente(G, v.inf)       
-        for a in range(1,len(G.V)+1):            
-            if a in ad:
+        for a in G.V:            
+            if a.inf in ad:
                 fila +=[1]
             else:
                 fila +=[0]
@@ -69,13 +73,30 @@ def leer_grafo_file(nombre_file, nombre_grafo):
             Ar = []
             Vr = []
             for c in archivo:
-                Ar +=[Vertice(int(c[0]))]
-                for ci in c[1:]:
+                cad_1 =""
+                for ci in c:
                     if ci != ' ' and ci != '\n':
-                        Vr +=[Arista(Vertice(int(c[0])), Vertice(int(ci)))]
+                        cad_1 += ci
+                    else:
+                        break
+                Ar +=[Vertice(cad_1)] 
+                cad_2 =""               
+                for ci in c[len(cad_1)+1:]:
+                    if ci != ' ' and ci != '\n':
+                        cad_2 += ci                 
+                    elif cad_2 != "":
+                        Vr +=[Arista(Vertice(cad_1), Vertice(cad_2))]
+                        cad_2 =""                    
+            Vr +=[Arista(Vertice(cad_1), Vertice(cad_2))] ##si el achivo no tiene ultima linea
         return Grafo(Ar,Vr,nombre_grafo)  
     except FileNotFoundError:
         print("El archivo no se encontro") 
+
+#piinta la Mattriz de adyacencia de un grafo, Recibe una matriz de adyacencia
+#pinta_matriz_adyacencia(matriz_adyacencia(g1))
+def pinta_matriz_adyacencia(mtady):
+    for m in mtady:
+        print(m)
         
 
 
@@ -102,14 +123,14 @@ a7 = Arista(v3,v1)
 la = [a1,a2,a3,a4,a5,a6,a7]
 
 #Definicion del Grafo
-g1 = Grafo(lv,la,"G1")
-print(g1.inf)
+#g1 = Grafo(lv,la,"G1")
+#print(g1.inf)
 
 #vertice 
 v = 3
-print(f'Grado del vertice {v}: '+str(grado_verice(g1,v)))
-print(f'Vertices adyacente/incidente de {v}: '+str(verice_adyacente(g1,v)))
-mtr = matriz_adyacencia(g1)
+#print(f'Grado del vertice {v}: '+str(grado_verice(g1,v)))
+#print(f'Vertices adyacente/incidente de {v}: '+str(verice_adyacente(g1,v)))
+#mtr = matriz_adyacencia(g1)
 #print("Matriz de Adyacencia")
 #for m in mtr:
 #    print(m)
@@ -117,8 +138,9 @@ mtr = matriz_adyacencia(g1)
 #print(archivo.read())
 #Visualizamos el Grafo, 
 #pinta.pinta_grafo(g1,"G1") #define esta funcion
-print(leer_grafo_file("g1.dat", "G2").inf)
-#pinta.pinta_grafo(leer_grafo_file("g1.dat", "G2"), "G2")
-
-
-
+#print(leer_grafo_file("g.dat", "G2").inf)
+Gf=leer_grafo_file("g.dat", "G2")
+print(Gf.inf)
+#print(matriz_adyacencia(leer_grafo_file("g.dat", "G2")))
+pinta_matriz_adyacencia(matriz_adyacencia(leer_grafo_file("g.dat", "G2")))
+#pinta.pinta_grafo(leer_grafo_file("g.dat", "G2"), "G2")
