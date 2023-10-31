@@ -5,6 +5,8 @@ from PIL import Image, ImageTk #instalar esta libreria
 import matplotlib.pyplot as plt
 import matplotlib.image as mpimg
 
+coordenadas = []
+
 def pos_arista(GA, A): #calculamos la posicion de una arista en el grafo
     pos = 0
     for a in GA:
@@ -29,7 +31,7 @@ def pos_aris_en_aris(a,B): #calculamos la posicion de un vertice en el grafo
         pos +=1
     return -1
 
-def pinta_grafo(G, nombre="grafo", layout="circo", img_hd=False, p = False, camino=[]): #layout : circo, dot, fdp, neato, osage, twopi
+def pinta_grafo(G, nombre="grafo", layout="circo", img_hd=False, p = False, camino=[], coordenadas=""): #layout : circo, dot, fdp, neato, osage, twopi
     Q = []
     hay_camino = False
     if camino:
@@ -37,7 +39,8 @@ def pinta_grafo(G, nombre="grafo", layout="circo", img_hd=False, p = False, cami
         hay_camino = True         
 
     with open('grafo.dot', 'w') as archivo:
-        archivo.write('digraph G\n{\n\tnode [shape=circle];\n\tlayout='+layout+';\n\tsize="6,6";\n\trankdir=LR;\n')
+        archivo.write('digraph G\n{\n\tnode [shape=circle];\n\tlayout='+layout+';\n\tsize="6,6"\n')
+        archivo.write(coordenadas)
         for a in G.A:
             if str(a.vf.info) != "":
                 if p:                    
@@ -48,9 +51,9 @@ def pinta_grafo(G, nombre="grafo", layout="circo", img_hd=False, p = False, cami
                             elif pos_aris_en_aris(Arista(a.vf, a.vi),LC) != -1:
                                 archivo.write('\t'+str(a.vf.info) + ' -> ' + str(a.vi.info) + '[fontcolor=blue label='+str(a.w)+',fontcolor="red",fontsize="25", color="red", penwidth=2.0]\n')
                             else:                                                                            
-                                archivo.write('\t'+str(a.vi.info) + ' -> ' + str(a.vf.info) + '[fontcolor=blue label='+str(a.w)+', dir=both]\n')
+                                archivo.write('\t'+str(a.vi.info) + ' -> ' + str(a.vf.info) + '[fontcolor=blue label='+str(a.w)+', dir=both, fontsize="20"]\n')
                         else:                                                                            
-                            archivo.write('\t'+str(a.vi.info) + ' -> ' + str(a.vf.info) + '[fontcolor=blue label='+str(a.w)+', dir=both]\n')
+                            archivo.write('\t'+str(a.vi.info) + ' -> ' + str(a.vf.info) + '[fontcolor=blue label='+str(a.w)+', dir=both, fontsize="20"]\n')
                         #if pos_aris_en_aris(Arista(a.vf, a.vi),LC) == -1:
                         G.A.pop(pos_arista(G.A, Arista(a.vf, a.vi)))                                          
                     else:
@@ -58,9 +61,9 @@ def pinta_grafo(G, nombre="grafo", layout="circo", img_hd=False, p = False, cami
                             if pos_aris_en_aris(Arista(a.vi, a.vf),LC) != -1:
                                 archivo.write('\t'+str(a.vi.info) + ' -> ' + str(a.vf.info) + '[fontcolor=blue label='+str(a.w)+',fontcolor="red",fontsize="25", color="red", penwidth=2.0]\n')
                             else:
-                                archivo.write('\t'+str(a.vi.info) + ' -> ' + str(a.vf.info) + '[fontcolor=blue label='+str(a.w)+']\n')
+                                archivo.write('\t'+str(a.vi.info) + ' -> ' + str(a.vf.info) + '[fontcolor=blue label='+str(a.w)+', fontsize="20"]\n')
                         else:
-                            archivo.write('\t'+str(a.vi.info) + ' -> ' + str(a.vf.info) + '[fontcolor=blue label='+str(a.w)+']\n')
+                            archivo.write('\t'+str(a.vi.info) + ' -> ' + str(a.vf.info) + '[fontcolor=blue label='+str(a.w)+', fontsize="20"]\n')
                          
                 else:
                     archivo.write('\t'+str(a.vi.info) + ' -> ' + str(a.vf.info) + '\n')
