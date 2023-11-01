@@ -36,10 +36,10 @@ def pinta_grafo(G, nombre="grafo", layout="circo", img_hd=False, p = False, cami
     hay_camino = False
     if camino:
         LC = list(map(lambda i,f: Arista(Vertice(i),Vertice(f)), camino[:-1], camino[1:]))
-        hay_camino = True         
+        hay_camino = True     
 
     with open('grafo.dot', 'w') as archivo:
-        archivo.write('digraph G\n{\n\tnode [shape=circle];\n\tlayout='+layout+';\n\tsize="6,6"\n')
+        archivo.write('digraph G\n{\n\tnode [shape=circle, fontsize=32, width=0.5, style=filled, color="#215b99", fontcolor="white", fontname="Impact"];\n\tlayout='+layout+';\n\tsize="10,10"\n')
         archivo.write(coordenadas)
         for a in G.A:
             if str(a.vf.info) != "":
@@ -47,23 +47,23 @@ def pinta_grafo(G, nombre="grafo", layout="circo", img_hd=False, p = False, cami
                     if pos_arista(G.A, Arista(a.vf, a.vi)) != -1:
                         if hay_camino:
                             if pos_aris_en_aris(Arista(a.vi, a.vf),LC) != -1:
-                                archivo.write('\t'+str(a.vi.info) + ' -> ' + str(a.vf.info) + '[fontcolor=blue label='+str(a.w)+',fontcolor="red",fontsize="25", color="red", penwidth=2.0]\n')
+                                archivo.write('\t'+str(a.vi.info) + ' -> ' + str(a.vf.info) + '[fontcolor=blue label='+str(a.w)+',fontcolor="red",fontsize="26", color="red", penwidth=3.0, fontname="times-bold"]\n')
                             elif pos_aris_en_aris(Arista(a.vf, a.vi),LC) != -1:
-                                archivo.write('\t'+str(a.vf.info) + ' -> ' + str(a.vi.info) + '[fontcolor=blue label='+str(a.w)+',fontcolor="red",fontsize="25", color="red", penwidth=2.0]\n')
+                                archivo.write('\t'+str(a.vf.info) + ' -> ' + str(a.vi.info) + '[fontcolor=blue label='+str(a.w)+',fontcolor="red",fontsize="26", color="red", penwidth=3.0, fontname="times-bold"]\n')
                             else:                                                                            
-                                archivo.write('\t'+str(a.vi.info) + ' -> ' + str(a.vf.info) + '[fontcolor=blue label='+str(a.w)+', dir=both, fontsize="20"]\n')
+                                archivo.write('\t'+str(a.vi.info) + ' -> ' + str(a.vf.info) + '[fontcolor=blue label='+str(a.w)+', dir=both, fontsize="25", fontname="times-bold"]\n')
                         else:                                                                            
-                            archivo.write('\t'+str(a.vi.info) + ' -> ' + str(a.vf.info) + '[fontcolor=blue label='+str(a.w)+', dir=both, fontsize="20"]\n')
+                            archivo.write('\t'+str(a.vi.info) + ' -> ' + str(a.vf.info) + '[fontcolor=blue label='+str(a.w)+', dir=both, fontsize="25", fontname="times-bold"]\n')
                         #if pos_aris_en_aris(Arista(a.vf, a.vi),LC) == -1:
                         G.A.pop(pos_arista(G.A, Arista(a.vf, a.vi)))                                          
                     else:
                         if hay_camino:
                             if pos_aris_en_aris(Arista(a.vi, a.vf),LC) != -1:
-                                archivo.write('\t'+str(a.vi.info) + ' -> ' + str(a.vf.info) + '[fontcolor=blue label='+str(a.w)+',fontcolor="red",fontsize="25", color="red", penwidth=2.0]\n')
+                                archivo.write('\t'+str(a.vi.info) + ' -> ' + str(a.vf.info) + '[fontcolor=blue label='+str(a.w)+',fontcolor="red",fontsize="26", color="red", penwidth=3.0, fontname="times-bold"]\n')
                             else:
-                                archivo.write('\t'+str(a.vi.info) + ' -> ' + str(a.vf.info) + '[fontcolor=blue label='+str(a.w)+', fontsize="20"]\n')
+                                archivo.write('\t'+str(a.vi.info) + ' -> ' + str(a.vf.info) + '[fontcolor=blue label='+str(a.w)+', fontsize="25", fontname="times-bold"]\n')
                         else:
-                            archivo.write('\t'+str(a.vi.info) + ' -> ' + str(a.vf.info) + '[fontcolor=blue label='+str(a.w)+', fontsize="20"]\n')
+                            archivo.write('\t'+str(a.vi.info) + ' -> ' + str(a.vf.info) + '[fontcolor=blue label='+str(a.w)+', fontsize="25", fontname="times-bold"]\n')
                          
                 else:
                     archivo.write('\t'+str(a.vi.info) + ' -> ' + str(a.vf.info) + '\n')

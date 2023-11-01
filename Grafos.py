@@ -242,6 +242,9 @@ def camino_corto_vi_vf(G:Grafo, vi:Vertice, vf:Vertice): #calcula el camino mas 
     camino.insert(0,vi.info)
     return camino
 
+def cerrar_calle(G:Grafo, vi, vf):
+    G.A[pos_arista(G, Arista(busca_vertice(G,vi),busca_vertice(G,vf)))].w = float('+inf')
+
 def pintaGP(G:Grafo):
     n_vertices = len(G.V)
     edges = list(map(lambda x: [x.vi.info, x.vf.info], G.A))  
@@ -325,10 +328,10 @@ pinta.pinta_grafop(g1, "G1", "circo",True)
 colonia = leer_grafop_file("colonia.dat", "Cunducan")
 coordenadas = ('1 [pos="10.99,-23.18!"]\n2 [pos="5.95,-21.62!"]\n3 [pos="1.47,-19.64!"]\n4 [pos="1.31,-16.40!"]\n5 [pos="4.61,-3.70!"]\n'
         '6 [pos="20.83,-1.33!"]\n7 [pos="31.13,-4.30!"]\n8 [pos="33.23,-5.51!"]\n9 [pos="33.83,-7.17!"]\n10 [pos="34.49,-8.69!"]\n'
-        '11 [pos="35.44,-10.32!"]\n12 [pos="36.18,-11.22!"]\n13 [pos="37.32,-12.10!"]\n14 [pos="32.62,-14.00!"]\n15 [pos="28.62,-15.86!"]\n'
+        '11 [pos="35.44,-10.32!"]\n12 [pos="36.18,-11.60!"]\n13 [pos="37.32,-13.10!"]\n14 [pos="32.62,-14.55!"]\n15 [pos="28.62,-15.86!"]\n'
         '16 [pos="24.42,-17.62!"]\n17 [pos="20.60,-19.31!"]\n18 [pos="15.43,-18.98!"]\n19 [pos="7.42,-16.21!"]\n20 [pos="5.44,-16.09!"]\n'
         '21 [pos="8.11,-6.68!"]\n22 [pos="14.05,-4.98!"]\n23 [pos="21.21,-4.02!"]\n24 [pos="31.14,-8.12!"]\n25 [pos="31.56,-10.00!"]\n'
-        '26 [pos="32.10,-11.84!"]\n27 [pos="32.28,-12.73!"]\n28 [pos="28.16,-14.23!"]\n29 [pos="23.74,-15.94!"]\n30 [pos="19.76,-17.96!"]\n'
+        '26 [pos="32.10,-11.50!"]\n27 [pos="32.28,-12.95!"]\n28 [pos="28.16,-14.23!"]\n29 [pos="23.74,-15.94!"]\n30 [pos="19.76,-17.96!"]\n'
         '31 [pos="18.74,-16.36!"]\n32 [pos="10.50,-13.42!"]\n33 [pos="10.14,-11.32!"]\n34 [pos="8.54,-8.38!"]\n35 [pos="14.24,-6.97!"]\n36 [pos="17.56,-7.31!"]\n'
         '37 [pos="21.54,-7.19!"]\n38 [pos="27.78,-7.81!"]\n39 [pos="28.78,-11.41!"]\n40 [pos="27.48,-12.71!"]\n41 [pos="23.30,-13.95!"]\n42 [pos="20.54,-14.55!"]\n'
         '43 [pos="12.78,-12.75!"]\n44 [pos="14.74,-10.13!"]\n45 [pos="17.62,-10.17!"]\n46 [pos="21.92,-10.51!"]\n47 [pos="23.08,-11.77!"]\n'
@@ -345,12 +348,12 @@ g001 = leer_grafop_file("g001.dat", "GF")
 #dijkstra(g001, busca_vertice(g001,1))
 
 ## EJERCICO DE TAPAR CALLES PARA CALCULAR OTRA OPCION  #############
-colonia.A[pos_arista(colonia, Arista(busca_vertice(colonia,25),busca_vertice(colonia,10)))].w = float('+inf')
-colonia.A[pos_arista(colonia, Arista(busca_vertice(colonia,6),busca_vertice(colonia,7)))].w = float('+inf')
-colonia.A[pos_arista(colonia, Arista(busca_vertice(colonia,1),busca_vertice(colonia,18)))].w = float('+inf')
+cerrar_calle(colonia, 1, 18)
+cerrar_calle(colonia, 1, 17)
+cerrar_calle(colonia, 6, 7)
 corto = camino_corto_vi_vf(colonia, busca_vertice(colonia,1), busca_vertice(colonia,7)) 
 print(corto)
-pinta.pinta_grafo(colonia, "Cunduacan2", "neato",True,True, corto, coordenadas)
+pinta.pinta_grafo(colonia, "Cunduacan1", "neato",True,True, corto, coordenadas)
 
 ###################################33
 #print(describe_grafo_dist(g001))
