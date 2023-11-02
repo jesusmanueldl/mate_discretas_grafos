@@ -182,7 +182,21 @@ def peso(G, vi, vf): #calculamo el peso de un vertice a otro
     for a in G.A:
         if a.vi.info == vi.info and a.vf.info == vf.info:
             return a.w
-    
+
+#algoritmo de busqueda en profundidad
+def DFS(G:Grafo, vi:Vertice, vf:Vertice):
+    Q = []
+    Q += [vi]
+    G.V[pos_vert(G,vi)].visitado = True
+    while Q:
+        vAct = Q.pop(0)
+        if vAct.info == vf.info:
+            return True
+        for w in vertice_adyacente(G, vAct):
+            if not w.visitado:
+                Q +=[w]
+                G.V[pos_vert(G,w)].visitado = True
+    return False    
 
 def dijkstra(G:Grafo, vi:Vertice):
     G.V[pos_vert(G,vi)].dist = 0  # el vertice actual
@@ -220,10 +234,12 @@ def Floyd_Warshall(G:Grafo):
         D = [row[:] for row in mad_pesos]
         for k in range(0,n): #calculamos las distancias cortas pasando por k
             for i in range(0,n): #aqui vamos a iterar sobre los verticces fila
-                for j in range(0,n):#aqui vamos a iterar sobre los verticces columna
-                    dt = round(D[i][k] + D[k][j],2) #calculamos cuanto cuesta ir de i a j pasando por k
-                    if D[i][j] > dt: #si es menor ese valor que dij lo cambiamos
-                        D[i][j] = dt
+                if i != k:
+                    for j in range(0,n):#aqui vamos a iterar sobre los verticces columna
+                        if j != k:
+                            dt = round(D[i][k] + D[k][j],2) #calculamos cuanto cuesta ir de i a j pasando por k
+                            if D[i][j] > dt: #si es menor ese valor que dij lo cambiamos
+                                D[i][j] = dt
     return mad_pesos,D
 
 def buscar_vf(L, c): #busca el vertice final en la lista de vertices con sus pesos
@@ -244,6 +260,9 @@ def camino_corto_vi_vf(G:Grafo, vi:Vertice, vf:Vertice): #calcula el camino mas 
 
 def cerrar_calle(G:Grafo, vi, vf):
     G.A[pos_arista(G, Arista(busca_vertice(G,vi),busca_vertice(G,vf)))].w = float('+inf')
+
+
+
 
 def pintaGP(G:Grafo):
     n_vertices = len(G.V)
@@ -337,7 +356,7 @@ coordenadas = ('1 [pos="10.99,-23.18!"]\n2 [pos="5.95,-21.62!"]\n3 [pos="1.47,-1
         '43 [pos="12.78,-12.75!"]\n44 [pos="14.74,-10.13!"]\n45 [pos="17.62,-10.17!"]\n46 [pos="21.92,-10.51!"]\n47 [pos="23.08,-11.77!"]\n'
         '48 [pos="21.16,-11.67!"]\n49 [pos="17.60,-11.87!"]\n')
 #-------------floyd----
-g001 = leer_grafop_file("g001.dat", "GF")
+#g001 = leer_grafop_file("g001.dat", "GF")
 #mad_p, mad_d = Floyd_Warshall(g001)
 #mad_p, mad_d = Floyd_Warshall(colonia)
 #print('\n'.join(map(str, mad_p))) 
@@ -348,16 +367,16 @@ g001 = leer_grafop_file("g001.dat", "GF")
 #dijkstra(g001, busca_vertice(g001,1))
 
 ## EJERCICO DE TAPAR CALLES PARA CALCULAR OTRA OPCION  #############
-cerrar_calle(colonia, 1, 18)
-cerrar_calle(colonia, 1, 17)
-cerrar_calle(colonia, 6, 7)
-corto = camino_corto_vi_vf(colonia, busca_vertice(colonia,1), busca_vertice(colonia,7)) 
-print(corto)
-pinta.pinta_grafo(colonia, "Cunduacan1", "neato",True,True, corto, coordenadas)
+#cerrar_calle(colonia, 1, 18)
+#cerrar_calle(colonia, 1, 17)
+#cerrar_calle(colonia, 6, 7)
+#corto = camino_corto_vi_vf(colonia, busca_vertice(colonia,1), busca_vertice(colonia,7)) 
+#print(corto)
+#pinta.pinta_grafo(colonia, "Cunduacan1", "neato",True,True, corto, coordenadas)
 
 ###################################33
 #print(describe_grafo_dist(g001))
-
+#print(DFS(colonia, busca_vertice(colonia,1), busca_vertice(colonia,7)))
 '''
 # Carga la imagen desde un archivo
 imagen = mpimg.imread('Cunduacan.png')
@@ -386,6 +405,10 @@ plt.show()
 #print(camino_corto_vi_vf(gf1, busca_vertice(gf1,1), busca_vertice(gf1,6)))
 #pinta.pinta_grafo(gf1, "gf1","dot",False,True)
 
-
-
+#gpneg = leer_grafop_file("grafopnegativo.dat", "gpneg")
+#mad_p, mad_d = Floyd_Warshall(gpneg)
+#print('\n'.join(map(str, mad_p))) 
+#print('---------FW-----------')
+#print('\n'.join(map(str, mad_d)))  #esto es para floid-warshall
+#pinta.pinta_grafo(gpneg, "gpneg","circo",False,True)
 

@@ -54,7 +54,7 @@ def pinta_grafo(G, nombre="grafo", layout="circo", img_hd=False, p = False, cami
                                 archivo.write('\t'+str(a.vi.info) + ' -> ' + str(a.vf.info) + '[fontcolor=blue label='+str(a.w)+', dir=both, fontsize="25", fontname="times-bold"]\n')
                         else:                                                                            
                             archivo.write('\t'+str(a.vi.info) + ' -> ' + str(a.vf.info) + '[fontcolor=blue label='+str(a.w)+', dir=both, fontsize="25", fontname="times-bold"]\n')
-                        #if pos_aris_en_aris(Arista(a.vf, a.vi),LC) == -1:
+                        #if pos_aris_en_aris(Arista(a.vf, a.vi),G.A) != -1:
                         G.A.pop(pos_arista(G.A, Arista(a.vf, a.vi)))                                          
                     else:
                         if hay_camino:
@@ -63,8 +63,7 @@ def pinta_grafo(G, nombre="grafo", layout="circo", img_hd=False, p = False, cami
                             else:
                                 archivo.write('\t'+str(a.vi.info) + ' -> ' + str(a.vf.info) + '[fontcolor=blue label='+str(a.w)+', fontsize="25", fontname="times-bold"]\n')
                         else:
-                            archivo.write('\t'+str(a.vi.info) + ' -> ' + str(a.vf.info) + '[fontcolor=blue label='+str(a.w)+', fontsize="25", fontname="times-bold"]\n')
-                         
+                            archivo.write('\t'+str(a.vi.info) + ' -> ' + str(a.vf.info) + '[fontcolor=blue label='+str(a.w)+', fontsize="25", fontname="times-bold"]\n')                         
                 else:
                     archivo.write('\t'+str(a.vi.info) + ' -> ' + str(a.vf.info) + '\n')
             else:
