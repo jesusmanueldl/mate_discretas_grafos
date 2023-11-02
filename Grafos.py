@@ -262,8 +262,6 @@ def cerrar_calle(G:Grafo, vi, vf):
     G.A[pos_arista(G, Arista(busca_vertice(G,vi),busca_vertice(G,vf)))].w = float('+inf')
 
 
-
-
 def pintaGP(G:Grafo):
     n_vertices = len(G.V)
     edges = list(map(lambda x: [x.vi.info, x.vf.info], G.A))  
@@ -405,10 +403,21 @@ plt.show()
 #print(camino_corto_vi_vf(gf1, busca_vertice(gf1,1), busca_vertice(gf1,6)))
 #pinta.pinta_grafo(gf1, "gf1","dot",False,True)
 
-#gpneg = leer_grafop_file("grafopnegativo.dat", "gpneg")
-#mad_p, mad_d = Floyd_Warshall(gpneg)
+gpneg = leer_grafop_file("grafopnegativo.dat", "gpneg")
+#dijkstra(gpneg, busca_vertice(gpneg,1))
+corto2 = camino_corto_vi_vf(gpneg, busca_vertice(gpneg,1), busca_vertice(gpneg,2))
+print(corto2)
+ll = list(map(lambda i,f: gpneg.A[pos_arista(gpneg,Arista(Vertice(i),Vertice(f)))], corto2[:-1], corto2[1:]))
+l2 = list(map(lambda vij: [vij.vi.info, vij.vf.info, vij.w], ll))
+suma = 0
+for a in l2:
+    suma += a[2]
+print(l2 + [suma])
+
+mad_p, mad_d = Floyd_Warshall(gpneg)
 #print('\n'.join(map(str, mad_p))) 
-#print('---------FW-----------')
-#print('\n'.join(map(str, mad_d)))  #esto es para floid-warshall
+print('---------FW-----------')
+print('\n'.join(map(str, mad_d)))  #esto es para floid-warshall
+
 #pinta.pinta_grafo(gpneg, "gpneg","circo",False,True)
 
