@@ -348,7 +348,7 @@ pinta.pinta_grafop(g1, "G1", "circo",True)
 #pinta.pinta_grafop(Gf, "G2", "circo",True)
 #print(matriz_adyacencia(leer_grafo_file("g.dat", "G2")))
 #pinta_matriz_adyacencia(matriz_adyacencia(leer_grafo_file("g1.dat", "G2")))
-colonia = leer_grafop_file("colonia.dat", "Cunducan")
+cunduacan = leer_grafop_file("cunduacan.dat", "Cunducan")
 coordenadas = ('1 [pos="10.99,-23.18!"]\n2 [pos="5.95,-21.62!"]\n3 [pos="1.47,-19.64!"]\n4 [pos="1.31,-16.40!"]\n5 [pos="4.61,-3.70!"]\n'
         '6 [pos="20.83,-1.33!"]\n7 [pos="31.16,-0.43!"]\n8 [pos="33.23,-5.51!"]\n9 [pos="33.83,-7.17!"]\n10 [pos="34.49,-8.69!"]\n'
         '11 [pos="35.44,-10.32!"]\n12 [pos="36.18,-11.60!"]\n13 [pos="37.32,-13.10!"]\n14 [pos="32.62,-14.55!"]\n15 [pos="28.62,-15.86!"]\n'
@@ -362,25 +362,25 @@ coordenadas = ('1 [pos="10.99,-23.18!"]\n2 [pos="5.95,-21.62!"]\n3 [pos="1.47,-1
 #-------------floyd----
 #g001 = leer_grafop_file("g001.dat", "GF")
 #mad_p, mad_d = Floyd_Warshall(g001)
-#mad_p, mad_d = Floyd_Warshall(colonia)
+#mad_p, mad_d = Floyd_Warshall(cunduacan)
 #print('\n'.join(map(str, mad_p))) 
 #print('---------FW-----------')
 #print('\n'.join(map(str, mad_d)))  #esto es para floid-warshall
 #pinta.pinta_grafo(g001, "Floyd_Warshall", "dot",False,True)
-#print(colonia.info)
+#print(cunduacan.info)
 #dijkstra(g001, busca_vertice(g001,1))
 
 ## EJERCICO DE TAPAR CALLES PARA CALCULAR OTRA OPCION  #############
-#cerrar_calle(colonia, 1, 18)
-#cerrar_calle(colonia, 1, 17)
-#cerrar_calle(colonia, 6, 7)
-camino_corto = camino_corto_vi_vf(colonia, busca_vertice(colonia,11), busca_vertice(colonia,19)) 
+#cerrar_calle(cunduacan, 1, 18)
+#cerrar_calle(cunduacan, 1, 17)
+#cerrar_calle(cunduacan, 6, 7)
+camino_corto = camino_corto_vi_vf(cunduacan, busca_vertice(cunduacan,11), busca_vertice(cunduacan,19)) 
 print(camino_corto)
-pinta.pinta_grafo(colonia, "Cunduacan1", "neato",True,True, camino_corto, coordenadas,25)
+pinta.pinta_grafo(cunduacan, "Cunduacan1", "neato",True,True, camino_corto, coordenadas,25)
 
 ###################################33
 #print(describe_grafo_dist(g001))
-#print(DFS(colonia, busca_vertice(colonia,1), busca_vertice(colonia,7)))
+#print(DFS(cunduacan, busca_vertice(cunduacan,1), busca_vertice(cunduacan,7)))
 '''
 # Carga la imagen desde un archivo
 imagen = mpimg.imread('Cunduacan.png')
@@ -392,18 +392,18 @@ plt.title('Camino más corto: '+ corto)
 plt.show()
 '''
 
-#dijkstra(colonia, busca_vertice(colonia,1))
-#print(describe_grafo_dist(colonia))
-#camino = camino_corto_vi_vf(colonia, busca_vertice(colonia,1), busca_vertice(colonia,7))
+#dijkstra(cunduacan, busca_vertice(cunduacan,1))
+#print(describe_grafo_dist(cunduacan))
+#camino = camino_corto_vi_vf(cunduacan, busca_vertice(cunduacan,1), busca_vertice(cunduacan,7))
 #print(list(map(lambda i,f: [Arista(Vertice(i),Vertice(f))], camino[:-1], camino[1:])))
-#mad_p = Floyd_Warshall(colonia)
+#mad_p = Floyd_Warshall(cunduacan)
 #print('\n'.join(map(str, mad_p))) 
-#pinta.pinta_grafo(leer_grafop_file("colonia.dat", "colonia"), "colonia", "dot",True, True)
+#pinta.pinta_grafo(leer_grafop_file("cunduacan.dat", "cunduacan"), "cunduacan", "dot",True, True)
 #pinta.pinta_grafop(g1, "BFS", "dot",False)
-#pinta.pinta_grafo(colonia, "Cunducan", "dot",True,True)
+#pinta.pinta_grafo(cunduacan, "Cunducan", "dot",True,True)
 
 
-#print(describe_grafo_dist(colonia))
+#print(describe_grafo_dist(cunduacan))
 #gf1 = leer_grafop_file("g001.dat", "GF")
 #pintaGP(gf1)
 #print(camino_corto_vi_vf(gf1, busca_vertice(gf1,1), busca_vertice(gf1,6)))
