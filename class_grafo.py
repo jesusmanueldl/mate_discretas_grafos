@@ -16,20 +16,17 @@ class Vertice:
 
 #definimos una Arista
 class Arista:
-    def __init__(self, vi, vf, w = float('+inf')):
+    def __init__(self, vi, vf, weight = float('+inf')):
         self.vi = vi
         self.vf = vf
-        if w == float('+inf'):
-            self.w = w #ponderdo de la arista
+        if weight == float('+inf'):
+            self.weight = weight #ponderdo de la arista
         else:
-            try:
-                self.w = int(w)
-            except ValueError:
-                try:
-                    self.w = float(w)
-                except ValueError:                
-                    pass
-        self.info = [self.vi.info, self.vf.info, self.w] #informacion de la arista
+            if '.' in str(weight):
+                self.weight = float(weight)
+            else:                
+                self.weight = int(weight)           
+        self.info = [self.vi.info, self.vf.info, self.weight] #informacion de la arista
   
 
 #definimos un Grafo
