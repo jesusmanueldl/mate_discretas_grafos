@@ -53,9 +53,9 @@ def pinta_grafo(G, nombre="grafo", layout="circo", img_hd=False, p = False, cami
                     if pos_arista(G.A, Arista(a.vf, a.vi, a.weight)) != -1:
                         if camino:
                             if pos_aris_en_aris(Arista(a.vi, a.vf, a.weight),LC) != -1:
-                                archivo.write('\t'+str(a.vi.info) + ' -> ' + str(a.vf.info) + '[fontcolor=blue label='+str(a.weight)+',fontcolor="red",fontsize="'+str(font_size_label)+'", color="red", penwidth=3.0, fontname="times-bold"]\n')
+                                archivo.write('\t'+str(a.vi.info) + ' -> ' + str(a.vf.info) + '[fontcolor=black label='+str(a.weight)+',fontsize="'+str(font_size_label)+'", color="red", penwidth=5.0, fontname="times-bold"]\n')
                             elif pos_aris_en_aris(Arista(a.vf, a.vi, a.weight),LC) != -1:
-                                archivo.write('\t'+str(a.vf.info) + ' -> ' + str(a.vi.info) + '[fontcolor=blue label='+str(a.weight)+',fontcolor="red",fontsize="'+str(font_size_label)+'", color="red", penwidth=3.0, fontname="times-bold"]\n')
+                                archivo.write('\t'+str(a.vf.info) + ' -> ' + str(a.vi.info) + '[fontcolor=black label='+str(a.weight)+', fontsize="'+str(font_size_label)+'", color="red", penwidth=5.0, fontname="times-bold"]\n')
                             else:                                                                            
                                 archivo.write('\t'+str(a.vi.info) + ' -> ' + str(a.vf.info) + '[fontcolor=blue label='+str(a.weight)+', dir="both", fontsize="'+str(font_size_label)+'", fontname="times-bold"]\n')
                         else:                                                                            
@@ -65,7 +65,7 @@ def pinta_grafo(G, nombre="grafo", layout="circo", img_hd=False, p = False, cami
                     else:
                         if camino:
                             if pos_aris_en_aris(Arista(a.vi, a.vf, a.weight),LC) != -1:
-                                archivo.write('\t'+str(a.vi.info) + ' -> ' + str(a.vf.info) + '[fontcolor=blue label='+str(a.weight)+',fontcolor="red",fontsize="'+str(font_size_label)+'", color="red", penwidth=3.0, fontname="times-bold"]\n')
+                                archivo.write('\t'+str(a.vi.info) + ' -> ' + str(a.vf.info) + '[fontcolor=black label='+str(a.weight)+',fontsize="'+str(font_size_label)+'", color="red", penwidth=5.0, fontname="times-bold"]\n')
                             else:
                                 archivo.write('\t'+str(a.vi.info) + ' -> ' + str(a.vf.info) + '[fontcolor=blue label='+str(a.weight)+', fontsize="'+str(font_size_label)+'", fontname="times-bold"]\n')
                         else:
