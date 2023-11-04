@@ -170,6 +170,14 @@ def pos_arista(G:Grafo, A: Arista): #calculamos la posicion de una arista en el 
             pos +=1
         return -1
 
+def pos_arista_sin_peso(G:Grafo, A: Arista): #calculamos la posicion de una arista en el grafo
+        pos = 0
+        for a in G.A:
+            if a.vi.info == A.vi.info and  a.vf.info == A.vf.info:              
+                return pos          
+            pos +=1
+        return -1
+
 
 def dist_min(Q): #calculamos cual de los vertice de la cola Q es mas pequeño en uento a su peso
     vi = Q[0]
@@ -223,7 +231,7 @@ def matriz_pesos(G:Grafo):
             if vi.info == vj.info:
                 fila += [0]               
             else:
-                pos_ar = pos_arista(G,Arista(G.V[pos_vert(G,vi)], G.V[pos_vert(G,vj)]))
+                pos_ar = pos_arista_sin_peso(G,Arista(G.V[pos_vert(G,vi)], G.V[pos_vert(G,vj)]))
                 if pos_ar != -1:
                     fila += [G.A[pos_ar].weight]
                 else:
@@ -262,7 +270,7 @@ def camino_corto_vi_vf(G:Grafo, vi:Vertice, vf:Vertice): #calcula el camino mas 
     return camino
 
 def cerrar_calle(G:Grafo, vi, vf):
-    G.A[pos_arista(G, Arista(busca_vertice(G,vi),busca_vertice(G,vf)))].weight = float('+inf')
+    G.A[pos_arista_sin_peso(G, Arista(busca_vertice(G,vi),busca_vertice(G,vf)))].weight = float('+inf')
 
 
         
@@ -360,13 +368,13 @@ coordenadas = ('1 [pos="10.99,-23.18!"]\n2 [pos="5.95,-21.62!"]\n3 [pos="1.47,-1
         '43 [pos="12.78,-12.75!"]\n44 [pos="14.74,-10.13!"]\n45 [pos="17.62,-10.17!"]\n46 [pos="21.92,-10.51!"]\n47 [pos="23.08,-11.77!"]\n'
         '48 [pos="21.16,-11.67!"]\n49 [pos="17.60,-11.87!"]\n')
 #-------------floyd----
-#g001 = leer_grafop_file("g001.dat", "GF")
-#mad_p, mad_d = Floyd_Warshall(g001)
-#mad_p, mad_d = Floyd_Warshall(cunduacan)
-#print('\n'.join(map(str, mad_p))) 
-#print('---------FW-----------')
-#print('\n'.join(map(str, mad_d)))  #esto es para floid-warshall
-#pinta.pinta_grafo(g001, "Floyd_Warshall", "dot",False,True)
+g001 = leer_grafop_file("g001.dat", "GF")
+mad_p = matriz_pesos(g001)
+mad_fw = Floyd_Warshall(g001)
+print('\n'.join(map(str, mad_p))) 
+print('---------FW-----------')
+print('\n'.join(map(str, mad_fw)))  #esto es para floid-warshall
+pinta.pinta_grafo(g001, "Floyd_Warshall", "circo",False,True)
 #print(cunduacan.info)
 #dijkstra(g001, busca_vertice(g001,1))
 
@@ -374,9 +382,9 @@ coordenadas = ('1 [pos="10.99,-23.18!"]\n2 [pos="5.95,-21.62!"]\n3 [pos="1.47,-1
 #cerrar_calle(cunduacan, 1, 18)
 #cerrar_calle(cunduacan, 1, 17)
 #cerrar_calle(cunduacan, 6, 7)
-camino_corto = camino_corto_vi_vf(cunduacan, busca_vertice(cunduacan,11), busca_vertice(cunduacan,19)) 
-print(camino_corto)
-pinta.pinta_grafo(cunduacan, "Cunduacan1", "neato",True,True, camino_corto, coordenadas,25)
+#camino_corto = camino_corto_vi_vf(cunduacan, busca_vertice(cunduacan,11), busca_vertice(cunduacan,19)) 
+#print(camino_corto)
+#pinta.pinta_grafo(cunduacan, "Cunduacan1", "neato",True,True, camino_corto, coordenadas,25)
 
 ###################################33
 #print(describe_grafo_dist(g001))
@@ -415,7 +423,7 @@ plt.show()
 #dijkstra(gpneg, busca_vertice(gpneg,1))
 corto2 = camino_corto_vi_vf(gpneg, busca_vertice(gpneg,1), busca_vertice(gpneg,2))
 print(corto2)
-ll = list(map(lambda i,f: gpneg.A[pos_arista(gpneg,Arista(Vertice(i),Vertice(f)))], corto2[:-1], corto2[1:]))
+ll = list(map(lambda i,f: gpneg.A[pos_arista_sin_peso(gpneg,Arista(Vertice(i),Vertice(f)))], corto2[:-1], corto2[1:]))
 l2 = list(map(lambda vij: [vij.vi.info, vij.vf.info, vij.weight], ll))
 suma = 0
 for a in l2:
