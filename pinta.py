@@ -43,9 +43,9 @@ def pinta_grafo(G, nombre="grafo", layout="circo", img_hd=False, p = False, cami
     Q = []
     if camino: #si hay caminos en la lista, los paso a una lista de arista 
         LC = list(map(lambda i,f: G.A[pos_arista_sin_peso(G.A, Arista(Vertice(i), Vertice(f)))], camino[:-1], camino[1:]))       
-
+    #style=filled, color="#51c46b", fontcolor="white", fontname="Impact"
     with open('grafo.dot', 'w') as archivo:
-        archivo.write('digraph G\n{\n\tnode [shape=circle, fontsize='+str(font_size_label)+', style=filled, color="#51c46b", fontcolor="white", fontname="Impact"];\n\tlayout="'+layout+'";\n\tsize="10,10"\n')
+        archivo.write('digraph G\n{\n\tnode [shape=circle, fontsize='+str(font_size_label)+'];\n\tlayout="'+layout+'";\n\tsize="10,10"\n')
         archivo.write(coordenadas)
         for a in G.A:
             if str(a.vf.info) != "":

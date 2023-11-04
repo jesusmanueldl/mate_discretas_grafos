@@ -350,7 +350,7 @@ pinta.pinta_grafop(g1, "G1", "circo",True)
 #pinta_matriz_adyacencia(matriz_adyacencia(leer_grafo_file("g1.dat", "G2")))
 colonia = leer_grafop_file("colonia.dat", "Cunducan")
 coordenadas = ('1 [pos="10.99,-23.18!"]\n2 [pos="5.95,-21.62!"]\n3 [pos="1.47,-19.64!"]\n4 [pos="1.31,-16.40!"]\n5 [pos="4.61,-3.70!"]\n'
-        '6 [pos="20.83,-1.33!"]\n7 [pos="31.13,-4.30!"]\n8 [pos="33.23,-5.51!"]\n9 [pos="33.83,-7.17!"]\n10 [pos="34.49,-8.69!"]\n'
+        '6 [pos="20.83,-1.33!"]\n7 [pos="31.16,-0.43!"]\n8 [pos="33.23,-5.51!"]\n9 [pos="33.83,-7.17!"]\n10 [pos="34.49,-8.69!"]\n'
         '11 [pos="35.44,-10.32!"]\n12 [pos="36.18,-11.60!"]\n13 [pos="37.32,-13.10!"]\n14 [pos="32.62,-14.55!"]\n15 [pos="28.62,-15.86!"]\n'
         '16 [pos="24.42,-17.62!"]\n17 [pos="20.60,-19.31!"]\n18 [pos="15.43,-18.98!"]\n19 [pos="7.42,-16.21!"]\n20 [pos="5.44,-16.09!"]\n'
         '21 [pos="8.11,-6.68!"]\n22 [pos="14.05,-4.98!"]\n23 [pos="21.21,-4.02!"]\n24 [pos="31.14,-8.12!"]\n25 [pos="31.56,-10.00!"]\n'
@@ -374,7 +374,7 @@ coordenadas = ('1 [pos="10.99,-23.18!"]\n2 [pos="5.95,-21.62!"]\n3 [pos="1.47,-1
 #cerrar_calle(colonia, 1, 18)
 #cerrar_calle(colonia, 1, 17)
 #cerrar_calle(colonia, 6, 7)
-camino_corto = camino_corto_vi_vf(colonia, busca_vertice(colonia,5), busca_vertice(colonia,13)) 
+camino_corto = camino_corto_vi_vf(colonia, busca_vertice(colonia,11), busca_vertice(colonia,19)) 
 print(camino_corto)
 pinta.pinta_grafo(colonia, "Cunduacan1", "neato",True,True, camino_corto, coordenadas,25)
 
