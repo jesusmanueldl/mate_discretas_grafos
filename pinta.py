@@ -39,7 +39,7 @@ def pos_aris_en_aris(a:Arista,B:list[Arista]): #calculamos la posicion de un ver
         pos +=1
     return -1
 
-def pinta_grafo(G, nombre="grafo", layout="circo", img_hd=False, p = False, camino=[], coordenadas="", font_size_label=15): #layout : circo, dot, fdp, neato, osage, twopi
+def pinta_grafo(G, nombre="grafo", layout="circo", img_hd=False, ponderado = False, camino=[], coordenadas="", font_size_label=15): #layout : circo, dot, fdp, neato, osage, twopi
     Q = []
     if camino: #si hay caminos en la lista, los paso a una lista de arista 
         LC = list(map(lambda i,f: G.A[pos_arista_sin_peso(G.A, Arista(Vertice(i), Vertice(f)))], camino[:-1], camino[1:]))       
@@ -49,7 +49,7 @@ def pinta_grafo(G, nombre="grafo", layout="circo", img_hd=False, p = False, cami
         archivo.write(coordenadas)
         for a in G.A:
             if str(a.vf.info) != "":
-                if p:                    
+                if ponderado:                    
                     if pos_arista(G.A, Arista(a.vf, a.vi, a.weight)) != -1:
                         if camino:
                             if pos_aris_en_aris(Arista(a.vi, a.vf, a.weight),LC) != -1:

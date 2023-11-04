@@ -49,7 +49,7 @@ pertenece aun vertice del grafo, si no tiene relacion alguna de igual forma se c
 |5         | 
 |----------|
 '''
-def leer_grafo_file(nombre_file, nombre_grafo):
+def leer_grafo_file(nombre_file, nombre_grafo, ponderado=False):
     try:        
         with open(nombre_file, 'r') as archivo:        
             Ar,Vr = [],[]            
@@ -59,11 +59,17 @@ def leer_grafo_file(nombre_file, nombre_grafo):
                 cad_1 +=str(c[0])
                 ar_0 = Vertice(cad_1)                
                 Ar +=[ar_0]                
-                if c[1:]:                           
-                    for ci in range(1,len(c[1:])):                        
-                            cad_2 += str(c[ci]) 
-                            Vr +=[Arista(ar_0, Vertice(cad_2))]
-                            cad_2 =""
+                if c[1:]:
+                    if not ponderado:                        
+                        for ci in range(1,len(c[1:])+1):                        
+                                cad_2 += str(c[ci]) 
+                                Vr +=[Arista(ar_0, Vertice(cad_2))]
+                                cad_2 =""
+                    else:  #posicion del sguente vf  [1 2 w 3 w 4 w] esto es para grafos ponderados
+                        for ci in range(1,len(c[1:]),2):                        
+                            cad_2 += str(c[ci])                                   
+                            Vr +=[Arista(ar_0, Vertice(cad_2), c[ci+1])]
+                            cad_2 ="" 
                 else:
                     Vr +=[Arista(ar_0, Vertice(cad_2))] 
         return Grafo(Ar,Vr,nombre_grafo)  
@@ -79,30 +85,6 @@ def leer_grafo_file(nombre_file, nombre_grafo):
 |5           | 
 |------------|
 '''        
-
-def leer_grafop_file(nombre_file, nombre_grafo):
-    try:        
-        with open(nombre_file, 'r') as archivo:        
-            Ar,Vr = [],[]            
-            for c in archivo:
-                c = c.split()
-                cad_1, cad_2 = "",""              
-                cad_1 +=c[0]+""
-                ar_0 = Vertice(cad_1)                
-                Ar +=[ar_0]
-                #posicion del sguente vf  [1 2 w 3 w 4 w]
-                inc = 0              
-                if c[1:]:                           
-                    for ci in range(1,len(c[1:]),2):                        
-                            cad_2 += str(c[ci])                                   
-                            Vr +=[Arista(ar_0, Vertice(cad_2), c[ci+1])]
-                            cad_2 =""                         
-                else:
-                    Vr +=[Arista(ar_0, Vertice(cad_2))] 
-        return Grafo(Ar,Vr,nombre_grafo)  
-    except FileNotFoundError:
-        print("El archivo no se encontro")  
-
 #piinta la Mattriz de adyacencia de un grafo, Recibe una matriz de adyacencia
 #pinta_matriz_adyacencia(matriz_adyacencia(g1))
 def pinta_matriz_adyacencia(mtady):
@@ -351,12 +333,12 @@ pinta.pinta_grafop(g1, "G1", "circo",True)
 #Visualizamos el Grafo, 
 #pinta.pinta_grafo(g1,"G1") #define esta funcion
 #print(leer_grafo_file("g.dat", "G2").inf)
-#Gf=leer_grafop_file("g2p.dat", "G2P")
+#Gf=leer_grafo_file("g2p.dat", "G2P",True)
 #print(Gf.inf)
 #pinta.pinta_grafop(Gf, "G2", "circo",True)
 #print(matriz_adyacencia(leer_grafo_file("g.dat", "G2")))
 #pinta_matriz_adyacencia(matriz_adyacencia(leer_grafo_file("g1.dat", "G2")))
-cunduacan = leer_grafop_file("cunduacan.dat", "Cunducan")
+#cunduacan = leer_grafo_file("cunduacan.dat", "Cunducan", True)
 coordenadas = ('1 [pos="10.99,-23.18!"]\n2 [pos="5.95,-21.62!"]\n3 [pos="1.47,-19.64!"]\n4 [pos="1.31,-16.40!"]\n5 [pos="4.61,-3.70!"]\n'
         '6 [pos="20.83,-1.33!"]\n7 [pos="31.16,-0.43!"]\n8 [pos="33.23,-5.51!"]\n9 [pos="33.83,-7.17!"]\n10 [pos="34.49,-8.69!"]\n'
         '11 [pos="35.44,-10.32!"]\n12 [pos="36.18,-11.60!"]\n13 [pos="37.32,-13.10!"]\n14 [pos="32.62,-14.55!"]\n15 [pos="28.62,-15.86!"]\n'
@@ -368,15 +350,18 @@ coordenadas = ('1 [pos="10.99,-23.18!"]\n2 [pos="5.95,-21.62!"]\n3 [pos="1.47,-1
         '43 [pos="12.78,-12.75!"]\n44 [pos="14.74,-10.13!"]\n45 [pos="17.62,-10.17!"]\n46 [pos="21.92,-10.51!"]\n47 [pos="23.08,-11.77!"]\n'
         '48 [pos="21.16,-11.67!"]\n49 [pos="17.60,-11.87!"]\n')
 #-------------floyd----
-g001 = leer_grafop_file("g001.dat", "GF")
-mad_p = matriz_pesos(g001)
-mad_fw = Floyd_Warshall(g001)
-print('\n'.join(map(str, mad_p))) 
-print('---------FW-----------')
-print('\n'.join(map(str, mad_fw)))  #esto es para floid-warshall
-pinta.pinta_grafo(g001, "Floyd_Warshall", "circo",False,True)
+#g001 = leer_grafo_file("g001.dat", "GF",True)
+#mad_p = matriz_pesos(g001)
+#mad_fw = Floyd_Warshall(g001)
+#print('\n'.join(map(str, mad_p))) 
+#print('---------FW-----------')
+#print('\n'.join(map(str, mad_fw)))  #esto es para floid-warshall
+#pinta.pinta_grafo(g001, "Floyd_Warshall", "circo",False,True)
 #print(cunduacan.info)
 #dijkstra(g001, busca_vertice(g001,1))
+ef = leer_grafo_file("gp04.dat", "Grafo04", True)
+print(ef.info)
+pinta.pinta_grafo(ef, "Grafo04","dot",False,True,[],"",15)
 
 ## EJERCICO DE TAPAR CALLES PARA CALCULAR OTRA OPCION  #############
 #cerrar_calle(cunduacan, 1, 18)
@@ -406,18 +391,18 @@ plt.show()
 #print(list(map(lambda i,f: [Arista(Vertice(i),Vertice(f))], camino[:-1], camino[1:])))
 #mad_p = Floyd_Warshall(cunduacan)
 #print('\n'.join(map(str, mad_p))) 
-#pinta.pinta_grafo(leer_grafop_file("cunduacan.dat", "cunduacan"), "cunduacan", "dot",True, True)
+#pinta.pinta_grafo(leer_grafo_file("cunduacan.dat", "cunduacan",True), "cunduacan", "dot",True, True)
 #pinta.pinta_grafop(g1, "BFS", "dot",False)
 #pinta.pinta_grafo(cunduacan, "Cunducan", "dot",True,True)
 
 
 #print(describe_grafo_dist(cunduacan))
-#gf1 = leer_grafop_file("g001.dat", "GF")
+#gf1 = leer_grafo_file("g001.dat", "GF",True)
 #pintaGP(gf1)
 #print(camino_corto_vi_vf(gf1, busca_vertice(gf1,1), busca_vertice(gf1,6)))
 #pinta.pinta_grafo(gf1, "gf1","dot",False,True)
 
-#gpneg = leer_grafop_file("grafopnegativo.dat", "gpneg")
+#gpneg = leer_grafo_file("grafopnegativo.dat", "gpneg",True)
 #pinta.pinta_grafo(gpneg, "gpneg","circo",False,True,[],"",15)
 '''
 #dijkstra(gpneg, busca_vertice(gpneg,1))

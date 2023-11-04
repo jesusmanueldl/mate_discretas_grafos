@@ -1,16 +1,21 @@
 digraph G
 {
 	node [shape=circle, fontsize=15];
-	layout="circo";
+	layout="dot";
 	size="10,10"
-	1 -> 2[fontcolor=blue label=3, dir="both", fontsize="15", fontname="times-bold"]
-	1 -> 3[fontcolor=blue label=5, dir="both", fontsize="15", fontname="times-bold"]
-	1 -> 4[fontcolor=blue label=1, dir="both", fontsize="15", fontname="times-bold"]
-	2 -> 5[fontcolor=blue label=9, dir="both", fontsize="15", fontname="times-bold"]
-	3 -> 4[fontcolor=blue label=-7, fontsize="15", fontname="times-bold"]
-	3 -> 5[fontcolor=blue label=7, dir="both", fontsize="15", fontname="times-bold"]
-	4 -> 3[fontcolor=blue label=7, fontsize="15", fontname="times-bold"]
-	4 -> 6[fontcolor=blue label=9, dir="both", fontsize="15", fontname="times-bold"]
-	6 -> 3[fontcolor=blue label=1, fontsize="15", fontname="times-bold"]
-	label="Floyd_Warshall" fontsize=15
+	1 -> 2[fontcolor=blue label=1, fontsize="15", fontname="times-bold"]
+	1 -> 3[fontcolor=blue label=3, dir="both", fontsize="15", fontname="times-bold"]
+	1 -> 5[fontcolor=blue label=2, dir="both", fontsize="15", fontname="times-bold"]
+	1 -> 6[fontcolor=blue label=4, fontsize="15", fontname="times-bold"]
+	2 -> 4[fontcolor=blue label=3, fontsize="15", fontname="times-bold"]
+	3 -> 2[fontcolor=blue label=6, fontsize="15", fontname="times-bold"]
+	3 -> 4[fontcolor=blue label=7, fontsize="15", fontname="times-bold"]
+	4 -> 5[fontcolor=blue label=2, fontsize="15", fontname="times-bold"]
+	4 -> 6[fontcolor=blue label=4, dir="both", fontsize="15", fontname="times-bold"]
+	5 -> 7[fontcolor=blue label=1, fontsize="15", fontname="times-bold"]
+	6 -> 5[fontcolor=blue label=3, fontsize="15", fontname="times-bold"]
+	6 -> 2[fontcolor=blue label=5, fontsize="15", fontname="times-bold"]
+	7 -> 6[fontcolor=blue label=2, fontsize="15", fontname="times-bold"]
+	7 -> 2[fontcolor=blue label=4, fontsize="15", fontname="times-bold"]
+	label="Grafo04" fontsize=15
 }
